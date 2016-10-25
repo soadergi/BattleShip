@@ -20,3 +20,5 @@ var model = {
 
 mvc pattern
 document.getElementById()
+indexOf
+charAt
