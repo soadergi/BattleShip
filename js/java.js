@@ -19,3 +19,4 @@ var model = {
 }
 
 mvc pattern
+document.getElementById()
