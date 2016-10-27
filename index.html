@@ -4,11 +4,12 @@
 	<meta charset="UTF-8">
 	<title>Морской бой</title>
 	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/java.js"></script>
 </head>
 <body>
 	<div class="output"></div>
 	<div id="wrapper">
-		<div id="up_abc"><div>1234567</div></div>
+		<div id="up_abc"><div>0123456</div></div>
 		<div id="left_abc"><div>A<br>B<br>C<br>D<br>E<br>F<br>G</div></div>
 		<table>
 			<tbody>
@@ -78,9 +79,11 @@
 			</tbody>
 		</table>
 		<div class="input_wrapper">
-			<label for="sector_input">Aim at sector number:</label>
-			<input id="sector_input" type="text" name="number">
-			<button>FIRE!</button>
+			<form onsubmit="event.preventDefault();">
+				<label for="sector_input">Aim at sector number:</label>
+				<input id="sector_input" type="text" pattern="[A-G][0-6]" name="input">
+				<button id="button">FIRE!</button>
+			</form>
 		</div>
 	</div>
 </body>
