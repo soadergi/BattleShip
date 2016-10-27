@@ -17,19 +17,37 @@ var controller = {
 		console.log(user_input);
 		var ABCDEFG = ["A","B","C","D","E","F","G"];
 		var input = ABCDEFG.indexOf(user_input[0]) + user_input[1];
-		console.log(input);
-		return input
+		if(input.charAt[0] == -1){break}
+			console.log(input);
+		model.checkShot(input);
 	}
 }
 
 var model = {
-	//generateShipLocation: function(){},
+	shipLocation: {
+		ship1: {
+			location: ["10","11","12"],
+			alive: ["1","1","1"]
+		},
+		ship2: {
+			location: ["30","31","32"],
+			alive: ["1","1","1"]
+		},
+		ship3: {
+			location: ["50","51","52"],
+			alive: ["1","1","1"]
+		}
+	},
+	generateShipLocation: function(){
+		//Код генерации кораблей
+		//Возвращает объект model.shipLocation.ships{}
+	},
+	checkShot: function(input){
+		return this.shipLocation.ship1.location.some(function(arrVal){
+			return input == arrVal;
+		});
+	}
 }
 
 
 window.onload = view.init;
-
-//mvc pattern
-//document.getElementById()
-//indexOf
-//charAt
