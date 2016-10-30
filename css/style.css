@@ -21,7 +21,7 @@ td{
 	border: 1px solid #fff;
 }
 
-.output{
+#output{
 	width: 400px;
 	height: 60px;
 	margin: 5px auto 0;
@@ -91,4 +91,12 @@ button{
 	font-size: 20px;
 	background-color: red;
 	color: white;
+	border: 2px solid darkred;
+	border-radius: 3px;
+}
+.hit{
+	background-color: rgba(204,102,102,0.7);
+}
+.miss{
+	background-color: rgba(102,102,102,0.7);
 }

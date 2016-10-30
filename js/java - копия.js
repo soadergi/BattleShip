@@ -1,34 +1,27 @@
-
+//window.onload = view.init;
 
 var view = {
 	displayRepeat: function(){
 		alert("You have already shot hire");
 	},
-	displayHit: function(input){
-		var hitInput = String(input);
-		var hit = document.getElementById(hitInput);
-		hit.className += ' hit';
-		var div = document.getElementById('output');
-		div.innerHTML = 'HIT!';
+	displayHit: function(){
+		alert("HIT!");
 	},
-	displayMiss: function(input){
-		var hitInput = String(input);
-		var hit = document.getElementById(hitInput);
-		hit.className += ' miss';
-		var div = document.getElementById('output');
-		div.innerHTML = 'MISS!';
+	displayMiss: function(){
+		alert("MISS!");
 	},
 	init: function(){
-		model.generateShipPosition();
+		model.generateShipLocation();
 		document.getElementById("button").addEventListener("click", controller.getUserInput);
 	},
 	handleFire: function(input, e){
+		console.log("handleFire"+input+ e);
 		switch(e){
 			case 0: this.displayRepeat();
 			break;
-			case -1: this.displayMiss(input);
+			case -1: this.displayMiss();
 			break;
-			case 1: this.displayHit(input);
+			case 1: this.displayHit();
 			break;
 			default: alert("ERROR. STAY DOWN");
 		}
@@ -36,16 +29,22 @@ var view = {
 }
 
 var controller = {
+	//input: 0,
 	getUserInput: function(){
 		var user_input = document.getElementById("sector_input").value;
+		console.log(user_input);
 		var ABCDEFG = ["A","B","C","D","E","F","G"];
 		var _0123456 = ["0","1","2","3","4","5","6"];
 		var input0 = ABCDEFG.indexOf(user_input[0]);
 		var input1 = _0123456.indexOf(user_input[1]);
+		//console.log(input0);
+		//console.log(input1);
 		if(input0 == -1 || input1 == -1){
 			alert('Введите корректное значение!');
 		} else{
 			var input = String(input0) + String(input1);
+			console.log("Input" + input);
+			//controller.input = input;
 			model.checkShot(input);
 		};
 	}
@@ -55,45 +54,22 @@ var model = {
 	result: -1,
 	hits: 0,
 	shots: 0,
+	ship: {
+		location: [],
+	},
 	shipLocation: {
 		ship1: {
-			location: [],
+			location: [10,11,12],
 			alive: [1,1,1]
 		},
 		ship2: {
-			location: [],
+			location: [30,31,32],
 			alive: [1,1,1]
 		},
 		ship3: {
-			location: [],
+			location: [50,51,52],
 			alive: [1,1,1]
 		}
-	},
-	generateShipPosition(){
-		this.shipLocation.ship1.location = this.generateShipLocation();
-		this.shipLocation.ship2.location = this.generateShipLocation();
-		for(var i in this.shipLocation.ship1.location){
-			for(var y in this.shipLocation.ship2.location){
-				if(this.shipLocation.ship1.location[i] == this.shipLocation.ship2.location[y]){
-					this.generateShipPosition();
-				}
-			};
-		};
-		this.shipLocation.ship3.location = this.generateShipLocation();
-		for(var i in this.shipLocation.ship1.location){
-			for(var y in this.shipLocation.ship3.location){
-				if(this.shipLocation.ship1.location[i] == this.shipLocation.ship3.location[y]){
-					this.generateShipPosition();
-				}
-			};
-		};
-		for(var i in this.shipLocation.ship2.location){
-			for(var y in this.shipLocation.ship3.location){
-				if(this.shipLocation.ship2.location[i] == this.shipLocation.ship3.location[y]){
-					this.generateShipPosition();
-				}
-			};
-		};
 	},
 	generateShipLocation: function(){
 		var firstPos = Math.round(Math.random()*6);
@@ -194,6 +170,7 @@ var model = {
 		return generategLocation = x;
 	},
 	checkShot: function(input){
+		console.log("checkShot" + input);
 		this.result = -1;
 		this.shots++;
 		for (var x in this.shipLocation.ship1.location){
@@ -202,31 +179,8 @@ var model = {
 					this.result = 0;
 					this.shots--;
 				} else {
+					alert("HIT"+x);
 					this.shipLocation.ship1.alive[x] = 0;
-					this.result = 1;
-					this.hits++;
-				}
-			}
-		};
-		for (var x in this.shipLocation.ship2.location){
-			if (this.shipLocation.ship2.location[x] == input){
-				if(this.shipLocation.ship2.alive[x] == 0){
-					this.result = 0;
-					this.shots--;
-				} else {
-					this.shipLocation.ship2.alive[x] = 0;
-					this.result = 1;
-					this.hits++;
-				}
-			}
-		};
-		for (var x in this.shipLocation.ship3.location){
-			if (this.shipLocation.ship3.location[x] == input){
-				if(this.shipLocation.ship3.alive[x] == 0){
-					this.result = 0;
-					this.shots--;
-				} else {
-					this.shipLocation.ship3.alive[x] = 0;
 					this.result = 1;
 					this.hits++;
 				}
@@ -238,4 +192,4 @@ var model = {
 
 
 
-window.onload = view.init, 2000;
+window.onload = view.init;

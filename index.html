@@ -7,7 +7,7 @@
 	<script type="text/javascript" src="js/java.js"></script>
 </head>
 <body>
-	<div class="output"></div>
+	<div id="output"></div>
 	<div id="wrapper">
 		<div id="up_abc"><div>0123456</div></div>
 		<div id="left_abc"><div>A<br>B<br>C<br>D<br>E<br>F<br>G</div></div>
@@ -79,11 +79,9 @@
 			</tbody>
 		</table>
 		<div class="input_wrapper">
-			<form onsubmit="event.preventDefault();">
-				<label for="sector_input">Aim at sector number:</label>
-				<input id="sector_input" type="text" pattern="[A-G][0-6]" name="input">
-				<button id="button">FIRE!</button>
-			</form>
+			<label for="sector_input">Aim at sector number:</label>
+			<input id="sector_input" type="text" name="input">
+			<button id="button">FIRE!</button>
 		</div>
 	</div>
 </body>
