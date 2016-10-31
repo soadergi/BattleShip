@@ -4,12 +4,18 @@ var view = {
 	displayRepeat: function(){
 		alert("You have already shot hire");
 	},
-	displayHit: function(input){
+	displayHit: function(input, e){
 		var hitInput = String(input);
 		var hit = document.getElementById(hitInput);
 		hit.className += ' hit';
 		var div = document.getElementById('output');
 		div.innerHTML = 'HIT!';
+		if(e == 2){
+			div.innerHTML = 'HIT! You sank the ship!';
+		};
+		if(model.hits == 9){
+			div.innerHTML = 'HIT! You sank the ship!<br/>VICTORY!';
+		};
 	},
 	displayMiss: function(input){
 		var hitInput = String(input);
@@ -29,6 +35,8 @@ var view = {
 			case -1: this.displayMiss(input);
 			break;
 			case 1: this.displayHit(input);
+			break;
+			case 2: this.displayHit(input, e);
 			break;
 			default: alert("ERROR. STAY DOWN");
 		}
@@ -205,6 +213,9 @@ var model = {
 					this.shipLocation.ship1.alive[x] = 0;
 					this.result = 1;
 					this.hits++;
+					if(this.shipLocation.ship1.alive[0] == 0 && this.shipLocation.ship1.alive[1] == 0 && this.shipLocation.ship1.alive[2] == 0){
+						this.result = 2;
+					}
 				}
 			}
 		};
@@ -217,6 +228,9 @@ var model = {
 					this.shipLocation.ship2.alive[x] = 0;
 					this.result = 1;
 					this.hits++;
+					if(this.shipLocation.ship2.alive[0] == 0 && this.shipLocation.ship2.alive[1] == 0 && this.shipLocation.ship2.alive[2] == 0){
+						this.result = 2;
+					}
 				}
 			}
 		};
@@ -229,6 +243,9 @@ var model = {
 					this.shipLocation.ship3.alive[x] = 0;
 					this.result = 1;
 					this.hits++;
+					if(this.shipLocation.ship3.alive[0] == 0 && this.shipLocation.ship3.alive[1] == 0 && this.shipLocation.ship3.alive[2] == 0){
+						this.result = 2;
+					}
 				}
 			}
 		};
@@ -238,4 +255,4 @@ var model = {
 
 
 
-window.onload = view.init, 2000;
+window.onload = view.init;
