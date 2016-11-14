@@ -14,7 +14,7 @@ var view = {
 			div.innerHTML = 'HIT! You sank the ship!';
 		};
 		if(model.hits == 9){
-			div.innerHTML = 'HIT! You sank the ship!<br/>VICTORY!';
+			div.innerHTML = 'HIT! You sank the ship!<br/>VICTORY! You did '+model.shots+' shots!';
 		};
 	},
 	displayMiss: function(input){
@@ -25,6 +25,10 @@ var view = {
 		div.innerHTML = 'MISS!';
 	},
 	init: function(){
+		var td = $("td");
+		td.click(function(){
+			model.checkShot($(this).attr('id'));
+		})
 		model.generateShipPosition();
 		document.getElementById("button").addEventListener("click", controller.getUserInput);
 	},
@@ -249,6 +253,11 @@ var model = {
 				}
 			}
 		};
+		var hitPosition = document.getElementById(input);
+		if (hitPosition.classList.contains("miss")){
+			this.result = 0;
+			this.shots--;
+		}
 		view.handleFire(input, this.result);
 	}
 }
